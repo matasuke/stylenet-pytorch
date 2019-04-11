@@ -1,7 +1,10 @@
-# Stylenet Pytorch implementation
+# Stylenet Pytorch
 Pytorch Implementation of [Stylenet](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/06/Generating-Attractive-Visual-Captions-with-Styles.pdf)
 
+This implementation is based on Pytorch 1.0
+
 ## Setup
+To install required modules run command below.
 ```
 pipenv install
 pipenv shell
