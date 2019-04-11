@@ -22,19 +22,19 @@ python stylenet/text_preprocessor.py \
 ```
 
 or just put Flickr8K dataset and FlickrStyle to 'data/train_data' and type it.
-'''
+```
 sh sh/preprocess.sh
-'''
+```
 
 # Train
 configuration for training and inference is based on data/configs/default.yml
 
-'''
+```
 python stylenet/train.py -config_path data/configs/default.yml
-'''
+```
 
 # inference
-'''
+```
 python stylenet/generate.py \
     -img_dir <path to image directory>/ # it can be /sample_imgs/ \
     -text_preprocessor_path <path to save name of vocab file created by text_preprocessor.py> \
@@ -44,4 +44,4 @@ python stylenet/generate.py \
     -beam_width 5 \
     -gen_max_len 50 \
     -config_path data/configs/default.yml \
-'''
+```
