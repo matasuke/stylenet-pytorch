@@ -164,13 +164,15 @@ class TextPreprocessor:
         convert list of tokens to list of index.
 
         :param tokens: list of token
+        :param sos: append sos token
+        :param eos: append eos token
         :return: list of index
         '''
         indices = list(self.token2index(token) for token in tokens)
         if sos:
             indices = [self.SOS_ID] + indices
         if eos:
-            indices = [self.EOS_ID] + indices
+            indices = indices + [self.EOS_ID]
 
         return indices
 
@@ -179,13 +181,15 @@ class TextPreprocessor:
         convert list of index to list of tokens.
 
         :param indice: list of lidex
+        :param sos: append sos token
+        :param eos: append eos token
         :return: list of tokens
         '''
         tokens = list(self.index2token(index) for index in indice)
         if sos:
             tokens = [self.SOS_SYMBOL] + tokens
         if eos:
-            tokens = [self.EOS_SYMBOL] + tokens
+            tokens = tokens + [self.EOS_SYMBOL]
 
         return tokens
 
@@ -243,11 +247,11 @@ class TextPreprocessor:
 
 if __name__ == '__main__':
     parser = ArgumentParser('create vocaburaly with Flickr8k dataset')
-    parser.add_argument('-normal_path', type=str,
+    parser.add_argument('-normal_path', type=str, required=True,
                         help='path to normal captions, which are pre-processed')
-    parser.add_argument('-style_path', type=str,
+    parser.add_argument('-style_path', type=str, required=True,
                         help='path to style captions, which are pre-processed')
-    parser.add_argument('-save_path', type=str,
+    parser.add_argument('-save_path', type=str, required=True,
                         help='path to save path')
     parser.add_argument('-max_vocab_size', type=int, default=0,
                         help='maximum vocaburaly size. all vocaburaly is used when 0')
@@ -270,17 +274,22 @@ if __name__ == '__main__':
 
     deliminator = re.compile(r'\d*.jpg#\d*')
 
+    print('Loading normal text...')
     with normal_path.open() as f:
         normal_data = [sentence.strip() for sentence in f.readlines()]
         for idx, img_caption in enumerate(normal_data):
             caption = deliminator.sub('', img_caption)
-            normal_data[idx] = caption.split()
+            normal_data[idx] = caption.strip()
+    print(f'Normal text size: {len(normal_data)}')
 
+    print('Loading stylized text...')
     with style_path.open() as f:
         style_data = [sentence.strip() for sentence in f.readlines()]
+    print(f'Stylized text size: {len(style_data)}')
 
     mixed_data = normal_data + style_data
     max_vocab_size = args.max_vocab_size if args.max_vocab_size > 0 else None
+    print(f'Mixed text size: {len(mixed_data)}')
 
     print('Creating vocaburaly...')
     text_preprocessor = TextPreprocessor.create(
@@ -290,6 +299,8 @@ if __name__ == '__main__':
         dim_size=args.dim_size,
         window_size=args.window_size,
     )
+
+    print(f'Vocaburaly size: {text_preprocessor.vocab_size}')
 
     print(f'Saving vocaburaly files to {str(save_path)}')
     text_preprocessor.save(save_path)

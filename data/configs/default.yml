@@ -1,0 +1,35 @@
+model_path: data/trained_model/model/
+train_from: null
+preprocessor_path: data/trained_model/text_preprocessor/Flickr8k_FlickrStyle-humor.pkl
+
+# data configurations
+normal_caption_path: data/train_data/captions/Flickr8k.token.txt
+style_caption_path: data/train_data/captions/FlickrStyle_v0.9/humor/funny_train.txt
+img_dir: data/train_data/images/Flicker8k_Dataset/
+
+# image configurations
+img_size: 256
+crop_size: 224
+
+# model configurations
+normal_batch_size: 64
+style_batch_size: 96
+random_init: 1.0
+dropout_ratio: 0  # temporaly set as 0
+num_layers: 1
+embed_dim: 500
+hidden_dim: 512
+style_dim: 512
+optimizer: 'adam'
+max_grad_norm: 5.0
+lr_decay: 1 # decay rate
+start_decay_at: 1000 # epoch of stating decay
+normal_lr: 0.0002
+style_lr: 0.0005
+num_epoch: 30
+
+# others
+gpus: 0
+num_workers: 0
+normal_log_step: 50
+style_log_step: 10

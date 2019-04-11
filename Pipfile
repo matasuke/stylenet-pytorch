@@ -11,12 +11,13 @@ pytest = "python -m pytest -vv"
 codecov = "codecov --token="
 
 [packages]
+pyyaml = "*"
 torch= ">=1.0"
 torchvision = "*"
 torchtext = "*"
-jupyter = "*"
 scipy = "*"
 nltk = "*"
+gensim = "*"
 
 [dev-packages]
 codecov = "*"

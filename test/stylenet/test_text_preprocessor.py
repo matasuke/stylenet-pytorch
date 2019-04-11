@@ -1,7 +1,7 @@
 import numpy as np
 from pathlib import Path
 
-from src.stylenet.text_preprocessor import TextPreprocessor
+from stylenet.text_preprocessor import TextPreprocessor
 
 EXPECT_SENTENCE = 'the weather today is very nice .'
 EXPECT_TOKENS = ['the', 'weather', 'today', 'is', 'very', 'nice', '.']

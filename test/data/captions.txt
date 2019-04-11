@@ -1,0 +1,7 @@
+test1.jpg#0	a man in an orange hat starring at something .
+test2.jpg#0	a child playing on a rope net .
+test3.jpg#0	a dog shakes its head near the shore , a red ball next to it .
+test4.jpg#0	a boy smiles in front of a stony wall in a city .
+test5.jpg#0	a black dog leaps over a log .
+test6.jpg#0	a brown and white dog is running through the snow .
+test7.jpg#0	a collage of one person climbing a cliff .
